@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <title> Ecommerce app (INIT)</title>
+</head>
+
+{% if products %}
+  <div id="product_cards">
+    {% for product in products %}
+      <div id="product_card_item">
+        <h1>{{ product["image"] }}!</h1>
+        <h1>{{ product["name"] }}!</h1>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <h1>Pas de produit à afficher</h1>
+{% endif %}

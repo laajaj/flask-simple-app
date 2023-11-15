@@ -1,6 +1,7 @@
 from flask import Flask
 import csv
 import datetime
+from flask import render_template
 
 app = Flask("my-webb-app")
 
@@ -38,7 +39,6 @@ def convert_to_float(val):
     
     return converted_value
         
-
 @app.route("/top_10_products")
 def get_10_top():
     data = []
@@ -53,7 +53,7 @@ def get_10_top():
         
     data.sort(key= lambda a: a["ratings"], reverse=True)
     new_data = data[0:10]
-    return f"<h1>Histroy is : {new_data}</h1>"
+    return render_template('products.html', products=new_data)
 
 
 @app.route("/history")

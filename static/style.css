@@ -1,0 +1,14 @@
+#product_card_item {
+    display: flex;
+    flex-direction: column;
+}
+
+#product_cards {
+    display: flex;
+    
+    flex-direction: row;
+}
+
+* {
+    background-color: red;
+}
