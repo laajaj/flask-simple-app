@@ -18,7 +18,7 @@ def list_products():
 @app.route("/file_columns")
 def get_file_columns():
     data = []
-    with open('data/Air Conditioners.csv', 'r', newline='') as csvfile:
+    with open('data/air_conditioners.csv', 'r', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             data.append(row)
@@ -26,11 +26,34 @@ def get_file_columns():
     return f"<h1>first element : {data[0]}</h1>"
 
 
+def get_rating(row):
+    return row.get('ratings')
+
+
+def convert_to_float(val):
+    try:
+        converted_value = float(val)
+    except ValueError:
+        converted_value = 0
+    
+    return converted_value
+        
+
 @app.route("/top_10_products")
 def get_10_top():
     data = []
-    # votre code ici 
-    return f"<h1>Histroy is : {data}</h1>"
+    with open('data/air_conditioners.csv', 'r', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            data.append(row)
+    
+    # convert rating to float
+    for row in data:
+        row["ratings"] = convert_to_float(row["ratings"])
+        
+    data.sort(key= lambda a: a["ratings"], reverse=True)
+    new_data = data[0:10]
+    return f"<h1>Histroy is : {new_data}</h1>"
 
 
 @app.route("/history")
